@@ -1,0 +1,25 @@
+# Ignore bin and obj folders
+bin/
+obj/
+
+# Ignore NuGet Packages
+packages/
+
+# Ignore the user-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Ignore Visual Studio code analysis files
+Generated_Code/
+
+# Ignore files related to SQL Server databases (if applicable)
+**/App_Data/*.mdf
+**/App_Data/*.ldf
+**/App_Data/*.sdf
+
+
+# Others
+*.pubxml
+*.pubxml.user

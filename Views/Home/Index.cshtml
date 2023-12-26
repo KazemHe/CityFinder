@@ -1,0 +1,95 @@
+﻿@model PagedList.IPagedList<CityFinder.Models.City>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<h2>Cities</h2>
+
+@using (Html.BeginForm("Index", "Cities", FormMethod.Get, new { id = "searchForm" }))
+{
+    <p>
+        Find by name:
+        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control ", onkeyup = "searchCities()" })
+    </p>
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    var charMapping = {
+        'a': 'ש', 'b': 'נ', 'c': 'ב', 'd': 'ג', 'e': 'ק', 'f': 'כ', 'g': 'ע', 'h': 'י', 'i': 'ן',
+        'j': 'ח', 'k': 'ל', 'l': 'ך', 'm': 'צ', 'n': 'מ', 'o': 'ם', 'p': 'פ', 'q': '/', 'r': 'ר',
+        's': 'ד', 't': 'א', 'u': 'ו', 'v': 'ה', 'w': '\'', 'x': 'ס', 'y': 'ט', 'z': 'צ', ',': 'ת', ';': 'ף'
+    };
+
+    function convertToHebrew(input) {
+        return input.split('').map(function(char) {
+            return charMapping[char.toLowerCase()] || char; // Convert if mapping exists, else keep original
+        }).join('');
+    }
+
+    function searchCities() {
+        var searchValue = $('#SearchString').val();
+
+        // Check if input is likely in English but meant to be Hebrew and convert
+        if (isEnglishInputButMeantHebrew(searchValue)) {
+            searchValue = convertToHebrew(searchValue);
+        }
+
+        // Existing AJAX call
+        $.ajax({
+            url: '@Url.Action("Index", "Cities")', // Ensure this is the correct URL
+            type: 'GET',
+            data: { searchString: searchValue },
+            success: function (result) {
+                // Replace the table with the new filtered results
+                $('#citiesTable').html($(result).find('#citiesTable'));
+            }
+        });
+    }
+
+    function isEnglishInputButMeantHebrew(input) {
+        // Basic heuristic: if more than half of the characters are in the mapping, assume it's meant to be Hebrew
+        var englishCharCount = input.split('').filter(char => charMapping[char.toLowerCase()]).length;
+        return englishCharCount > input.length / 2;
+    }
+</script>
+
+<h2>
+    <!-- New column for Create button -->
+    @Html.ActionLink("Create New", "Create", "Cities", null, new { @class = "btn btn-success" })
+</h2>
+
+<table class="table" id="citiesTable">
+    <tr>
+        <th>
+            @Html.ActionLink("עיר", "Index", new { sortOrder = ViewBag.NameSortParm })
+            @if (ViewBag.NameSortParm == "")
+            {
+                <span class="sort-indicator">&#9660;</span> <!-- Ascending -->
+            }
+            else
+            {
+                <span class="sort-indicator">&#9650;</span> <!-- Descending -->
+            }
+
+        </th>
+        <th>Actions</th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", "Cities", new { id = item.Id }, new { @class = "btn btn-default" })
+                @Html.ActionLink("Delete", "Delete", "Cities", new { id = item.Id }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
+</table>
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
