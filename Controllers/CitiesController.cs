@@ -45,6 +45,11 @@ namespace CityFinder.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name")] City city)
         {
+            if (db.Cities.Any(c => c.Name.Equals(city.Name, StringComparison.OrdinalIgnoreCase)))
+            {
+                ModelState.AddModelError("Name", "A city with this name already exists.");
+                return View(city);
+            }
             if (ModelState.IsValid)
             {
                 db.Cities.Add(city);
