@@ -5,15 +5,13 @@
     ViewBag.Title = "Home Page";
 }
 
-<h2>Cities</h2>
+<section class="title-section">
+<h2 class="home-page-title">ישובים</h2>
+<h2 class="home-page-title">ממשק אדמין</h2>
+    <h2></h2>
+</section>
 
-@using (Html.BeginForm("Index", "Cities", FormMethod.Get, new { id = "searchForm" }))
-{
-    <p>
-        Find by name:
-        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control ", onkeyup = "searchCities()" })
-    </p>
-}
+
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script>
     var charMapping = {
@@ -55,41 +53,76 @@
     }
 </script>
 
-<h2>
-    <!-- New column for Create button -->
-    @Html.ActionLink("Create New", "Create", "Cities", null, new { @class = "btn btn-success" })
-</h2>
 
-<table class="table" id="citiesTable">
-    <tr>
-        <th>
-            @Html.ActionLink("עיר", "Index", new { sortOrder = ViewBag.NameSortParm })
-            @if (ViewBag.NameSortParm == "")
+
+
+
+<div class="table-header">
+    <section>
+        @Html.ActionLink("ישוב", "Index", new { sortOrder = ViewBag.NameSortParm } , new {@class="sort" })
+        @if (ViewBag.NameSortParm == "")
             {
-                <span class="sort-indicator">&#9660;</span> <!-- Ascending -->
+        <span class="sort-indicator">&#9660;</span>  <!-- Ascending -->
             }
             else
             {
-                <span class="sort-indicator">&#9650;</span> <!-- Descending -->
+        <span class="sort-indicator">&#9650;</span>  <!-- Descending -->
             }
+    </section>
+    <section>
 
-        </th>
-        <th>Actions</th>
+        <a href="@Url.Action("Create", "Cities")">
+            <i class="fa-duotone fa-plus add-btn"></i>
+        </a>
+    </section>
+</div>
 
+@using (Html.BeginForm("Index", "Cities", FormMethod.Get, new { id = "searchForm" }))
+{
+<div class="search">
+    @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", onkeyup = "searchCities()" })
+</div>
+}
+
+
+
+<table class="table table-striped table-hover" id="citiesTable">
+    <tr>
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
+    <tr>
+
+        <td class="td-content">
+
+            <div class="item-name">
+
                 @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", "Cities", new { id = item.Id }, new { @class = "btn btn-default" })
-                @Html.ActionLink("Delete", "Delete", "Cities", new { id = item.Id }, new { @class = "btn btn-danger" })
-            </td>
-        </tr>
+            </div>
+            <div class="td-icons">
+                <!-- Edit button with Font Awesome icon -->
+                <a href="@Url.Action("Edit", "Cities", new { id = item.Id })" class="btn edin-btn">
+                    <i class="fa-solid fa-pen"></i>
+                </a>
+
+                <!-- Space or divider between buttons -->
+                <!-- Delete button with Font Awesome icon -->
+                <a href="@Url.Action("Delete", "Cities", new { id = item.Id })" class="btn delete-btn btn-danger">
+                    <i class="fa-solid fa-trash"></i>
+                </a>
+            </div>
+        </td>
+
+    </tr>
     }
 </table>
-
-@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+<div dir="ltr" class="pagination-container">
+    <span>pages</span>
+    @Html.PagedListPager(Model,
+        page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }),
+        new PagedListRenderOptions {
+            UlElementClasses = new[] { "pagination", "ml-2" } // Add margin-left to the pagination
+        })
+    <span class="page-info">@Model.PageNumber of @Model.PageCount</span>
+</div>

@@ -1,4 +1,89 @@
-﻿/* Style for the search box */
+﻿
+/* Navbar custom styles */
+.navbar {
+   
+}
+
+
+    .navbar > .container {
+        display: flex;
+        flex-wrap: inherit;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: row-reverse;
+    }
+
+    /* App name styling */
+    .navbar .app-name {
+        color: black;
+        background-color: white;
+       
+        border-radius: 0.25rem;
+    }
+
+    /* Right-side list styling */
+    .navbar .navbar-nav .nav-item .nav-link {
+        color: white;
+    }
+
+
+
+
+.navbar-nav {
+    padding:0;
+}
+
+/* Style for the list item */
+.nav-item-burger {
+    background-color: #128dff;
+    border-radius: 20px;
+    display: flex; /* Enables flexbox layout */
+    align-items: center; /* Centers items vertically within the container */
+    justify-content: center; /* Centers items horizontally within the container */
+    width: 3.3rem;
+}
+
+    /* Style for the Font Awesome icon */
+    .nav-item-burger .fa-bars {
+        font-size: 40px; /* Sets the font size of the icon */
+    }
+
+
+.nav-item-customers, .nav-item-chart, .nav-item-logout {
+    color: white; /* Sets the text color to white */
+    font-weight: 600;
+}
+
+
+.nav-item-customers {
+    background-color: #128dff;
+    padding: 8px;
+    margin: 0;
+    border-radius: 0px 14px 14px 0px;
+}
+
+.nav-item-chart {
+    background-color: #128dff;
+    padding: 8px;
+    margin: 0
+}
+
+.nav-item-logout {
+    background-color: #4d4d4d;
+    padding: 8px;
+    margin: 0;
+    border-radius: 14px 0px 0px 14px;
+}
+
+
+.fa-users,.fa-chart-simple,.fa-arrow-right-to-bracket {
+    padding: 13px;
+    font-size: 22px;
+}
+
+
+
+/* Style for the search box */
 .search-box {
     margin-bottom: 20px;
 }
@@ -9,6 +94,17 @@
         margin-right: 10px;
     }
 
+.title-section {
+    display: flex;
+    justify-content: space-between;
+}
+
+.home-page-title {
+    color: #3d7e9e;
+    font-weight: 700;
+    padding : 2%;
+}
+
 /* Style for tables */
 .table {
     width: 100%;
@@ -16,19 +112,28 @@
 }
 
     .table th, .table td {
-        border: 1px solid #ddd;
-        padding: 8px;
         text-align: left;
     }
 
 /* Style for buttons */
 .btn {
-    padding: 5px 10px;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    margin-right: 5px;
+    display: inline-block;
+    font-weight: 400;
+    color: #212529;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: .2rem .2rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
+
+
+
 
 .btn-default {
     background-color: #6c757d;
@@ -41,79 +146,187 @@
 .btn-success {
     background-color: #28a745;
 }
-/* Pagination Styles */
-.pagination {
-    display: inline-block;
-    padding-left: 0;
-    margin: 20px 0;
-    border-radius: 4px;
+
+
+
+
+.btn-primary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
 }
 
-    .pagination > li {
-        display: inline;
-    }
+.btn-danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
 
-        .pagination > li > a,
-        .pagination > li > span {
-            position: relative;
-            float: left;
-            padding: 6px 12px;
-            margin-left: -1px;
-            line-height: 1.42857143;
-            color: #337ab7;
-            text-decoration: none;
-            background-color: #fff;
-            border: 1px solid #ddd;
-        }
+/* Button sizes */
+.btn-lg {
+    padding: .5rem 1rem;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    border-radius: .3rem;
+}
 
-        .pagination > li:first-child > a,
-        .pagination > li:first-child > span {
-            margin-left: 0;
-            border-top-left-radius: 4px;
-            border-bottom-left-radius: 4px;
-        }
+/* Button with icons */
+.btn-icon {
+    padding-left: .5rem; /* Adjust as needed for icon spacing */
+}
 
-        .pagination > li:last-child > a,
-        .pagination > li:last-child > span {
-            border-top-right-radius: 4px;
-            border-bottom-right-radius: 4px;
-        }
+/* Icon styling */
+.btn .icon {
+    margin-right: .5rem; /* Adjust as needed for icon spacing */
+}
 
-        .pagination > li > a:hover,
-        .pagination > li > span:hover,
-        .pagination > li > a:focus,
-        .pagination > li > span:focus {
-            color: #23527c;
-            background-color: #eee;
-            border-color: #ddd;
-        }
+/* Pagination Styles */
+/* Custom Pagination CSS */
+.pagination {
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    border-radius: 0.25rem;
+    margin: 3px;
+    font-weight: 700;
+}
 
-    .pagination > .active > a,
-    .pagination > .active > span,
-    .pagination > .active > a:hover,
-    .pagination > .active > span:hover,
-    .pagination > .active > a:focus,
-    .pagination > .active > span:focus {
-        z-index: 2;
-        color: #fff;
-        cursor: default;
-        background-color: #337ab7;
-        border-color: #337ab7;
-    }
+.page-item.active .page-link {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+    margin: 10px ;
+}
 
-    .pagination > .disabled > span,
-    .pagination > .disabled > span:hover,
-    .pagination > .disabled > span:focus,
-    .pagination > .disabled > a,
-    .pagination > .disabled > a:hover,
-    .pagination > .disabled > a:focus {
-        color: #777;
-        cursor: not-allowed;
-        background-color: #fff;
-        border-color: #ddd;
-    }
+.page-link {
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #007bff;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+}
 
-    input{
-        width : 100px ;
-        margin:10px;
-    }
+.page-item:first-child .page-link {
+    margin-left: 0;
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+}
+
+.page-item:last-child .page-link {
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+}
+
+.page-link:hover {
+    color: #0056b3;
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+}
+
+.PagedList-skipToNext{
+    margin:3px;
+    display:none;
+}
+
+
+input {
+    width: 100px;
+    margin: 10px;
+}
+
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    background-color: #4d4d4d;
+    padding: 0px 7px 0px 7px;
+    margin-bottom: 10px;
+    align-items: center;
+    border-radius: 10px 0px 0px 10px;
+}
+
+.table{
+    padding:0;
+}
+
+.form-control {
+    width: 20rem;
+    border-radius: 20px;
+}
+
+
+
+a{
+    text-decoration:none ;
+}
+
+
+.sort{
+    color:#ffff ;
+}
+
+.add-btn{
+    color:#ffff;
+    font-weight  : 900 ;
+    font-size : 2rem ;
+}
+
+.edin-btn {
+    background-color: #0d6efd;
+    width: 30px;
+}
+
+.delete-btn {
+    width: 30px;
+}
+
+.td-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border :none
+}
+
+
+li{
+    margin: 3px
+}
+
+.active {
+    background-color: #2196F3;
+    width: 24px;
+    color: aliceblue;
+    text-align: center;
+    border-radius: 6px;
+}
+
+.pages {
+    display: flex;
+    align-items: center;
+    direction: ltr;
+}
+
+.pagination-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-weight: 700;
+}
+
+.page-info {
+    margin-left: 10px; /* Adjust the spacing as needed */
+    /* Add more styling here if needed */
+}
+
+.PagedList-skipToPrevious{
+    display:none;
+}
+
+.fa-solid{
+    color:#fff
+}
+.item-icons{
+    
+}

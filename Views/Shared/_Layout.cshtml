@@ -7,25 +7,31 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/site.css" rel="stylesheet" type="text/css" />
-
+    <script src="https://kit.fontawesome.com/20b52d2297.js" crossorigin="anonymous"></script>
 </head>
-<body>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+<body dir="rtl">
+    <nav class="navbar navbar-expand-sm ">
         <div class="container">
-            @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <!-- App Name on the left side -->
+            @Html.ActionLink("INNOVA", "Index", "Home", new { area = "" }, new { @class = "navbar-brand app-name" })
+
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+
+            <!-- List on the right side -->
+            <div class="collapse navbar-collapse justify-content-start">
+                <ul class="navbar-nav">
+                    <li class="nav-item-burger"><i class="fa-solid fa-bars"></i></li>
+                    <li class="nav-item-customers"><i class="fa-solid fa-users"></i>לקוחות</li>
+                    <li class="nav-item-chart"> <i class="fa-solid fa-chart-simple"></i>טבלאות</li>
+                    <li class="nav-item-logout"><i class="fa-solid fa-arrow-right-to-bracket"></i>התנתק</li>
                 </ul>
             </div>
         </div>
     </nav>
+
     <div class="container body-content">
         @RenderBody()
         <hr />
