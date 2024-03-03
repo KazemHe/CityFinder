@@ -22,7 +22,7 @@
 
     function convertToHebrew(input) {
         return input.split('').map(function(char) {
-            return charMapping[char.toLowerCase()] || char; // Convert if mapping exists, else keep original
+            return charMapping[char.toLowerCase()] || char; 
         }).join('');
     }
 
@@ -34,13 +34,12 @@
             searchValue = convertToHebrew(searchValue);
         }
 
-        // Existing AJAX call
         $.ajax({
-            url: '@Url.Action("Index", "Cities")', // Ensure this is the correct URL
+            url: '@Url.Action("Index", "Cities")',
             type: 'GET',
             data: { searchString: searchValue },
             success: function (result) {
-                // Replace the table with the new filtered results
+                
                 $('#citiesTable').html($(result).find('#citiesTable'));
             }
         });
@@ -52,10 +51,6 @@
         return englishCharCount > input.length / 2;
     }
 </script>
-
-
-
-
 
 <div class="table-header">
     <section>
@@ -122,7 +117,7 @@
     @Html.PagedListPager(Model,
         page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }),
         new PagedListRenderOptions {
-            UlElementClasses = new[] { "pagination", "ml-2" } // Add margin-left to the pagination
+            UlElementClasses = new[] { "pagination", "ml-2" } 
         })
     <span class="page-info">@Model.PageNumber of @Model.PageCount</span>
 </div>
