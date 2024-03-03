@@ -49,8 +49,6 @@ namespace CityFinder.Controllers
             return View(cities.ToPagedList(pageNumber, pageSize));
         }
 
-        // ... Other actions like About, Contact remain unchanged
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)
